@@ -16,18 +16,19 @@ import java.util.Set;
 public class Empleado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_emp")
     private int id;
 
     private Persona persona;
     private Periodo periodo;
     private String motivoCese;
 
-    @OneToMany
+    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<HistorialPuesto> historialPuestos;
-    @OneToMany
+    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<InformacionEconomica> informacionEconomica;
 
-    //private HistorialPuesto historialPuesto;
+
 
 }

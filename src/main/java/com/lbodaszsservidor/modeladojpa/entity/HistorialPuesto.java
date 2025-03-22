@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 public class HistorialPuesto {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_historial")
     private int id;
 
     private String puesto;
@@ -19,6 +21,6 @@ public class HistorialPuesto {
     private double salario;
 
     @ManyToOne
-    @JoinColumn(name = "id_emp", nullable=false)
+    @JoinColumn(name = "id_emp", nullable=false, foreignKey = @ForeignKey(name = "FK_historial_empleado_id_emp"))
     private Empleado empleado;
 }
