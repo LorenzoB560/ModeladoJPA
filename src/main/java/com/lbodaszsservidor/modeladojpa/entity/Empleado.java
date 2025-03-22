@@ -2,6 +2,7 @@ package com.lbodaszsservidor.modeladojpa.entity;
 
 import com.lbodaszsservidor.modeladojpa.entity.auxiliar.Periodo;
 import com.lbodaszsservidor.modeladojpa.entity.auxiliar.Persona;
+import com.lbodaszsservidor.modeladojpa.entity.auxiliar.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,11 +25,15 @@ public class Empleado {
     private Periodo periodo;
     private String motivoCese;
 
+    private Usuario usuario;
+
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<HistorialPuesto> historialPuestos;
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<InformacionEconomica> informacionEconomica;
 
+    @OneToOne(mappedBy = "mentor")
+    private Becario becario;
 
 
 }

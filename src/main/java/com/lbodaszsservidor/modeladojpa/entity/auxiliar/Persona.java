@@ -1,6 +1,6 @@
 package com.lbodaszsservidor.modeladojpa.entity.auxiliar;
 
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +14,12 @@ public class Persona {
     private String nombre;
     private String apellidos;
     private LocalDate fechaNacimiento;
+
+    @Enumerated(EnumType.STRING)
     private Genero genero;
-    private String direccionPostal;
+
+    @OneToOne
+    @JoinColumn(name = "direccion_postal_id", foreignKey = @ForeignKey(name = "FK_persona_direccion"))
+    private Direccion direccionPostal;
+
 }
