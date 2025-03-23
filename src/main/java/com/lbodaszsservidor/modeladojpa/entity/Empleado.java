@@ -59,4 +59,14 @@ public class Empleado {
     @ManyToOne
     @JoinColumn(name = "id_dept", foreignKey = @ForeignKey(name = "FK_empleado_departamento"))
     private Departamento departamento;
+
+    /*@ManyToMany
+    @JoinTable(name = "empleado_proyecto",
+            joinColumns = @JoinColumn(name = "id_emp"),
+            inverseJoinColumns = @JoinColumn(name = "id_proy"))
+    private Set<Proyecto> proyectos;*/
+
+    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<EmpleadoProyecto> empleadosProyectos;
 }
+
