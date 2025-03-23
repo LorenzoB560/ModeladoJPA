@@ -10,6 +10,6 @@ import java.time.LocalDate;
 @Data @NoArgsConstructor @AllArgsConstructor
 @Embeddable
 public class Periodo {
-    private LocalDate fechaContratacion;
-    private LocalDate fechaCese;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
 }

@@ -27,13 +27,33 @@ public class Empleado {
 
     private Usuario usuario;
 
+
+    // Todos los puestos que ha tenido un empleado
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<HistorialPuesto> historialPuestos;
+
+    // Todos los datos económicos del empleado
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<InformacionEconomica> informacionEconomica;
 
+    // A qué becario le imparte clase
     @OneToOne(mappedBy = "mentor")
     private Becario becario;
 
+
+    // Cursos para los que está cualificado como ponente
+    @ManyToMany
+    @JoinTable(name = "empleado_cualificado",
+            joinColumns = @JoinColumn(name = "id_emp"),
+            inverseJoinColumns = @JoinColumn(name = "id_curso"))
+    private Set<Curso> cursosCualificados;
+
+    // Ediciones que ha impartido como ponente
+    @OneToMany(mappedBy = "ponente", cascade = CascadeType.ALL)
+    private Set<EdicionCurso> edicionesImpartidas;
+
+    // Ediciones en las que está inscrito como alumno
+    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
+    private Set<Inscripcion> inscripciones;
 
 }

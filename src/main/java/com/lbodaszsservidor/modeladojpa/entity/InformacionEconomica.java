@@ -19,12 +19,11 @@ public class InformacionEconomica {
     @Column(name = "id_info_eco")
     private int id;
 
-    private double salario;
     private double comision;
     private String banco;
 
     //validar cuenta
-    private long cuentaBancaria;
+    private String cuentaBancaria;
 
     private TarjetaCredito tarjetaCredito;
 

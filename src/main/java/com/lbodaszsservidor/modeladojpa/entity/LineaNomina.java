@@ -15,6 +15,7 @@ public class LineaNomina {
     @Column(name = "id_lineaNomina")
     private long id;
 
+    private double salario;
     private double conceptos;
     private double liquido;
 
