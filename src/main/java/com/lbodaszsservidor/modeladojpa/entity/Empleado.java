@@ -56,4 +56,7 @@ public class Empleado {
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
     private Set<Inscripcion> inscripciones;
 
+    @ManyToOne
+    @JoinColumn(name = "id_dept", foreignKey = @ForeignKey(name = "FK_empleado_departamento"))
+    private Departamento departamento;
 }
