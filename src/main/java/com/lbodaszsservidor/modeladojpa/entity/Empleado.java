@@ -60,13 +60,14 @@ public class Empleado {
     @JoinColumn(name = "id_dept", foreignKey = @ForeignKey(name = "FK_empleado_departamento"))
     private Departamento departamento;
 
-    /*@ManyToMany
-    @JoinTable(name = "empleado_proyecto",
-            joinColumns = @JoinColumn(name = "id_emp"),
-            inverseJoinColumns = @JoinColumn(name = "id_proy"))
-    private Set<Proyecto> proyectos;*/
 
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<EmpleadoProyecto> empleadosProyectos;
+
+    @ManyToMany
+    @JoinTable(name = "desarrollo_empleado",
+            joinColumns = @JoinColumn(name = "id_emp"), foreignKey = @ForeignKey(name = "FK_desarrollo_empleado_empleado"),
+            inverseJoinColumns = @JoinColumn(name = "id_des"), inverseForeignKey = @ForeignKey(name = "FK_desarrollo_empleado_desarrollo"))
+    private Set<DesarrolloPersonal>  desarrolloPersonal;
 }
 
