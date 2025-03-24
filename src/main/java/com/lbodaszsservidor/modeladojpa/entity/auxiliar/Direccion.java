@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
-@Entity
+@Embeddable
 public class Direccion {
 
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_direccion")
-    private Long id;
+    private Long id;*/
 
     private String tipoVia;
     private String via;

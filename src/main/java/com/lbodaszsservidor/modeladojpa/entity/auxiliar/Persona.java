@@ -18,8 +18,18 @@ public class Persona {
     @Enumerated(EnumType.STRING)
     private Genero genero;
 
-    @OneToOne
-    @JoinColumn(name = "direccion_postal_id", foreignKey = @ForeignKey(name = "FK_persona_direccion"))
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "tipoVia", column = @Column(name = "tipoVia_personal")),
+            @AttributeOverride(name = "via", column = @Column(name = "via_personal")),
+            @AttributeOverride(name = "numero", column = @Column(name = "numero_personal")),
+            @AttributeOverride(name = "piso", column = @Column(name = "piso_personal")),
+            @AttributeOverride(name = "puerta", column = @Column(name = "puerta_personal")),
+            @AttributeOverride(name = "localidad", column = @Column(name = "localidad_personal")),
+            @AttributeOverride(name = "codigoPostal", column = @Column(name = "cp_personal")),
+            @AttributeOverride(name = "region", column = @Column(name = "region_personal")),
+            @AttributeOverride(name = "pais", column = @Column(name = "pais_personal"))
+    })
     private Direccion direccionPostal;
 
 }
