@@ -6,15 +6,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data @NoArgsConstructor @AllArgsConstructor
 @Entity
 @Table(name = "empleado_proyecto")
 public class EmpleadoProyecto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_emp_proy")
-    private Long id;
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "id_emp", nullable = false, foreignKey = @ForeignKey(name = "FK_empleado_proyecto_empleado"))

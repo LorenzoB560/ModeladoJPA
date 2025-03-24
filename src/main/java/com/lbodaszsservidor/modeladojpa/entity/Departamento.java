@@ -5,18 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @NoArgsConstructor @Data @AllArgsConstructor
 @Entity
 @Table(name = "dept", uniqueConstraints = {
         @UniqueConstraint(name = "UK_departamento_nombre", columnNames = "nombre"),
-        @UniqueConstraint(name = "UK_departamento_codigo", columnNames = "codigo")
 })
 public class Departamento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_dept")
-    private Long id;
+    private UUID id;
 
     @Column(nullable = false, unique = true)
     private String nombre;

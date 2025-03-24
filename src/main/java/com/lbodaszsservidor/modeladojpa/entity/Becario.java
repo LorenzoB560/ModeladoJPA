@@ -7,13 +7,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class Becario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id_becario")
+    private UUID id;
 
     private Persona persona;
     private String nombreCentro;

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor @NoArgsConstructor
@@ -14,9 +15,9 @@ import java.util.Set;
 @Table(name = "desarrollo_personal")
 public class DesarrolloPersonal {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_des")
-    private Long id;
+    private UUID id;
 
     @Column(nullable = false, unique = true)
     private String nombre;

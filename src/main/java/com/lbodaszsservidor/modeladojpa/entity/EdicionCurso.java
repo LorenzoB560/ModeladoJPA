@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -13,9 +14,9 @@ import java.util.Set;
 @Table(name = "edicion_curso")
 public class EdicionCurso {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_edicion")
-    private Long id;
+    private UUID id;
 
     private LocalDate fechaInicio;
     private LocalDate fechaFin;

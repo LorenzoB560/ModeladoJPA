@@ -2,6 +2,7 @@ package com.lbodaszsservidor.modeladojpa.entity;
 
 import com.lbodaszsservidor.modeladojpa.entity.auxiliar.Periodo;
 import com.lbodaszsservidor.modeladojpa.entity.auxiliar.Persona;
+import com.lbodaszsservidor.modeladojpa.entity.auxiliar.TarjetaCredito;
 import com.lbodaszsservidor.modeladojpa.entity.auxiliar.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,16 +11,18 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 @Entity
 @Table(name = "emp")
+@SecondaryTable(name = "info_eco", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id_emp"))
 public class Empleado{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_emp")
-    private int id;
+    private UUID id;
 
     private Persona persona;
     private Periodo periodo;
@@ -27,14 +30,45 @@ public class Empleado{
 
     private Usuario usuario;
 
+    //INFORMACIÓN ECONÓMICA
+
+    @Column(name = "comision", table = "info_eco")
+    private double comision;
+    @Column(name = "banco", table = "info_eco")
+    private String banco;
+
+    //validar cuenta
+    @Column(name = "cuenta_bancaria", table = "info_eco")
+    private String cuentaBancaria;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "numero", column = @Column(name = "numero_tarjeta", table = "info_eco")),
+            @AttributeOverride(name = "CVV", column = @Column(name = "cvv", table = "info_eco")),
+            @AttributeOverride(name = "fechaCaducidad", column = @Column(name = "fecha_caducidad", table = "info_eco"))
+    })
+    private TarjetaCredito tarjetaCredito;
+
+    //NOMINAS
+    @Column(name = "mes_nomina", table = "info_eco")
+    private String mes;
+    @Column(name = "anio_nomina", table = "info_eco")
+    private int anio;
+
+    //LINEA NOMINA
+
+    @Column(name = "salario_nomina", table = "info_eco")
+    private double salario;
+    @Column(name = "concepto_nomina", table = "info_eco")
+    private double conceptos;
+    @Column(name = "liquido_nomina", table = "info_eco")
+    private double liquido;
 
     // Todos los puestos que ha tenido un empleado
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<HistorialPuesto> historialPuestos;
 
-    // Todos los datos económicos del empleado
-    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<InformacionEconomica> informacionEconomica;
+
 
     // A qué becario le imparte clase
     @OneToOne(mappedBy = "mentor")

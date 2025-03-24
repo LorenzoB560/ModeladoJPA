@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -18,9 +19,9 @@ import java.util.Set;
 public class Proyecto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @JoinColumn(name = "id_proy")
-    private Long id;
+    private UUID id;
 
     private String nombre;
 

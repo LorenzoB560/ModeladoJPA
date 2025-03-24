@@ -6,15 +6,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data @NoArgsConstructor @AllArgsConstructor
 @Entity
 @Table(name = "historial")
 public class HistorialPuesto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_historial")
-    private int id;
+    private UUID id;
 
     private String puesto;
     private Periodo periodo;
