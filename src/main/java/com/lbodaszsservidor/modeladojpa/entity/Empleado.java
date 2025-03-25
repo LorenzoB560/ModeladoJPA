@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -27,6 +29,9 @@ public class Empleado{
     private Periodo periodo;
     private String motivoCese;
 
+
+    // Fecha de eliminación lógica
+    private LocalDate fechaEliminacion;
 
     @OneToOne(mappedBy = "empleado", cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario", nullable = false, unique = true, foreignKey = @ForeignKey(name = "FK_empleado_usuario_id_usuario"))
@@ -52,6 +57,11 @@ public class Empleado{
     })
     private TarjetaCredito tarjetaCredito;
 
+
+    @OneToMany(mappedBy = "empleado")
+    private Set<Nomina> nominas;
+
+    /*
     //NOMINAS
     @Column(name = "mes_nomina", table = "info_eco")
     private String mes;
@@ -66,7 +76,7 @@ public class Empleado{
     private double conceptos;
     @Column(name = "liquido_nomina", table = "info_eco")
     private double liquido;
-
+    */
     // Todos los puestos que ha tenido un empleado
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<HistorialPuesto> historialPuestos;

@@ -28,6 +28,6 @@ public class Usuario {
     private LocalDate fechaUltimoAcceso;
 
     @OneToOne
-    @JoinColumn(name = "id_emp", nullable = false, unique = true, foreignKey = @ForeignKey(name = "FK_usuario_empleado_id_emp"))
+    @JoinColumn(name = "id_emp", nullable = false, unique = true)
     private Empleado empleado;
 }
