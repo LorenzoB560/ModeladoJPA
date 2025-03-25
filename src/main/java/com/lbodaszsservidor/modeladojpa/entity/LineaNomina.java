@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 @Entity
+@Table(name = "linea_nomina")
 public class LineaNomina {
 
     @Id

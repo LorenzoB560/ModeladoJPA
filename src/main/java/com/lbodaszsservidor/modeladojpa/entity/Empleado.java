@@ -10,7 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -79,7 +78,7 @@ public class Empleado{
     */
     // Todos los puestos que ha tenido un empleado
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<HistorialPuesto> historialPuestos;
+    private Set<EmpleadoPuesto> listaEmpleadoPuesto;
 
 
 

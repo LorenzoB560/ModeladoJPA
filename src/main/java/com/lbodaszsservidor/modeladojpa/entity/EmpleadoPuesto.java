@@ -10,19 +10,23 @@ import java.util.UUID;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 @Entity
-@Table(name = "historial")
-public class HistorialPuesto {
+@Table(name = "empleado_puesto")
+public class EmpleadoPuesto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id_historial")
+    @Column(name = "id_empleado_puesto")
     private UUID id;
 
-    private String puesto;
     private Periodo periodo;
     private double salario;
 
     @ManyToOne
-    @JoinColumn(name = "id_emp", nullable=false, foreignKey = @ForeignKey(name = "FK_historial_empleado_id_emp"))
+    @JoinColumn(name = "id_emp")
     private Empleado empleado;
+
+    @ManyToOne
+    @JoinColumn(name = "id_puesto")
+    private Puesto puesto;
+
 }

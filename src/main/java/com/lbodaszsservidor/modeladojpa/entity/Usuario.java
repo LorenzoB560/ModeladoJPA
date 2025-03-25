@@ -10,6 +10,7 @@ import java.util.UUID;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 @Entity
+@Table(name = "usuario")
 public class Usuario {
 
     @Id
