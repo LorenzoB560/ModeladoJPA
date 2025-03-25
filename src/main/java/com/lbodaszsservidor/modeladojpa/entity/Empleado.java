@@ -3,13 +3,12 @@ package com.lbodaszsservidor.modeladojpa.entity;
 import com.lbodaszsservidor.modeladojpa.entity.auxiliar.Periodo;
 import com.lbodaszsservidor.modeladojpa.entity.auxiliar.Persona;
 import com.lbodaszsservidor.modeladojpa.entity.auxiliar.TarjetaCredito;
-import com.lbodaszsservidor.modeladojpa.entity.auxiliar.Usuario;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -28,6 +27,9 @@ public class Empleado{
     private Periodo periodo;
     private String motivoCese;
 
+
+    @OneToOne(mappedBy = "empleado", cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario", nullable = false, unique = true, foreignKey = @ForeignKey(name = "FK_empleado_usuario_id_usuario"))
     private Usuario usuario;
 
     //INFORMACIÓN ECONÓMICA
@@ -39,6 +41,7 @@ public class Empleado{
 
     //validar cuenta
     @Column(name = "cuenta_bancaria", table = "info_eco")
+    @Size(min = 20, max = 20, message = "La cuenta bancaria debe tener 20 dígitos")
     private String cuentaBancaria;
 
     @Embedded
@@ -72,6 +75,7 @@ public class Empleado{
 
     // A qué becario le imparte clase
     @OneToOne(mappedBy = "mentor")
+    @JoinColumn(name = "id_becario", nullable = false, unique = true, foreignKey = @ForeignKey(name = "FK_usuario_becario_id_becario"))
     private Becario becario;
 
 
@@ -103,5 +107,13 @@ public class Empleado{
             joinColumns = @JoinColumn(name = "id_emp"), foreignKey = @ForeignKey(name = "FK_desarrollo_empleado_empleado"),
             inverseJoinColumns = @JoinColumn(name = "id_des"), inverseForeignKey = @ForeignKey(name = "FK_desarrollo_empleado_desarrollo"))
     private Set<DesarrolloPersonal>  desarrolloPersonal;
+
+    // JERARQUÍA EMPRESARIAL
+    @ManyToOne
+    @JoinColumn(name = "id_jefe", foreignKey = @ForeignKey(name = "FK_empleado_jefe"))
+    private Empleado jefe;
+
+    @OneToMany(mappedBy = "jefe", cascade = CascadeType.ALL, orphanRemoval = false)
+    private Set<Empleado> subordinados;
 }
 
