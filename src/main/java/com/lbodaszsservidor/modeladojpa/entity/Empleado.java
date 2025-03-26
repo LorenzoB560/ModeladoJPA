@@ -16,7 +16,7 @@ import java.util.UUID;
 @Data @NoArgsConstructor @AllArgsConstructor
 @Entity
 @Table(name = "emp")
-@SecondaryTable(name = "info_eco", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id_emp"))
+@SecondaryTable(name = "info_eco", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id_emp"), uniqueConstraints = @UniqueConstraint(name = "UK_empleado_id_emp", columnNames = "id_emp"))
 public class Empleado{
 
     @Id

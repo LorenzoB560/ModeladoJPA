@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
+import java.util.UUID;
 
 
 @Data @NoArgsConstructor @AllArgsConstructor
@@ -13,9 +14,9 @@ import java.util.Set;
 @Table(name = "nomina")
 public class Nomina {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_nomina")
-    private long id;
+    private UUID id;
 
     private String mes;
     private int anio;
@@ -26,10 +27,4 @@ public class Nomina {
     @ManyToOne
     @JoinColumn(name = "id_emp", nullable = false, foreignKey = @ForeignKey(name = "FK_nomina_empleado_id_nomina"))
     private Empleado empleado;
-
 }
-
-
-// Todos los datos económicos del empleado
-//@OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
-//private Set<InformacionEconomica> informacionEconomica;
